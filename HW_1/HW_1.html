@@ -27,8 +27,7 @@
 
 
     function isEmptyString (str) {
-        var test = str.toString();
-        return (test.trim().length == 0 || test == 'null') ? true : false;
+        return (!str || str.trim().length == 0)
     }
 
     function askForNotEmptyStr(comments) {
