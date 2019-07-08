@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    var name = askForNotEmptyStr( "Ваше имя?");
+    var surName = askForNotEmptyStr("Ваша фамилия?");
+    var sName = askForNotEmptyStr("Ваше отчество?");
+    var age = askForAge("Ваш возраст?");
+
+    var sex = confirm("Нажмите ОК, если вы мужчина; Нажмите Cancel, если вы женщина.");
+
+    var pAge = sex  ? 70:65;
+    sex = sex ? "мужской" : "женский";
+
+
+    var result = "ФИО: " + surName + " " + name + " " + sName + "\n" +
+            "возраст, лет: " + age + "\n" +
+            "возраст, дней: " + age*365 + "\n" +
+            "пол: " + sex + "\n" +
+            "пенсионный возраст: " + pAge;
+    alert(result);
+
+
+    function isEmptyString (str) {
+        var test = str.toString();
+        return (test.trim().length == 0) ? true : false;
+    }
+
+    function askForNotEmptyStr(comments) {
+        var test = prompt(comments, "");
+        while (isEmptyString(test)) {
+            test = prompt( 'Ваш ввод некорректен. Повторите попытку! \n' + comments, "");
+        }
+        return test;
+    }
+
+    function askForAge(comments) {
+        var test = parseInt(prompt(comments, ""));
+        while ( isNaN(test) || test <=0 ) {
+            test = prompt( 'Ваш ввод некорректен. Повторите попытку! \n' + comments, "");
+        }
+        return test;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+
+    var pAge = 65;
+    var name = prompt("Ваше имя?", "");
+    var surName = prompt("Ваша фамилия?", "");
+    var sName = prompt("Ваше отчество?", "");
+    var age = prompt("Ваш возраст?", "");
+    if (isNaN(age = parseInt(age)))  age=0;
+    var sex = confirm("Baш пол мужской?");
+    var resultAge ;
+    if (sex) {
+       sex= "мужской";
+        pAge = 70;
+    } else {
+        sex="Женский";
+    }
+
+    var result = "ФИО: " + surName + " " + name + " " + sName + "\n" +
+            "возраст, лет: " + age + "\n" +
+            "возраст, дней: " + age*365 + "\n" +
+            "пол: " + sex + "\n" +
+            "пенсионный возраст: " + pAge;
+    alert(result);
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+var pAge = 65;
+var name = prompt("Ваше имя?", "");
+var surName = prompt("Ваша фамилия?", "");
+var sName = prompt("Ваше отчество?", "");
+var age = prompt("Ваш возраст?", "");
+age = isNaN(age = parseInt(age,10)) ? 0: age;
+
+var sex = confirm("Baш пол мужской?");
+
+pAge = sex  ? 70:65;
+sex = sex ? "мужской" : "женский";
+
+
+var result = "ФИО: " + surName + " " + name + " " + sName + "\n" +
+"возраст, лет: " + age + "\n" +
+"возраст, дней: " + age*365 + "\n" +
+"пол: " + sex + "\n" +
+"пенсионный возраст: " + pAge;
+alert(result);
+function isEmptyString (str) {
+    var test = str.toString();
+    if (test.length == 0 || test.replace(/\s/g,"") == "") {
+        return true;
+    }
+
+    return false;
+}
+</script>
+</body>
+</html>

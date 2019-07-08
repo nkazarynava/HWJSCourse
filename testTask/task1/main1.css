@@ -1,0 +1,68 @@
+body {
+    background-image: url('back.png');
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+h4,h1 {
+    text-align: center;
+}
+
+.left ul {
+
+
+}
+
+.left {
+    background-color: yellow;
+    padding: 15px;
+    width: 200px;
+    float:left;
+    height: auto;
+    margin-bottom: -1000%;/*calculates from div.row width*/
+    padding-bottom: 1000%;/*calculates from div.row width*/
+}
+
+.right {
+    /*background-color: #4d90fe;*/
+    padding:15px;
+    overflow: hidden; /*make know about float*/
+    height: auto;
+    margin-bottom: -1000%; /*calculates from div.row width*/
+    padding-bottom: 1000%; /*calculates from div.row width*/
+    background-image:  linear-gradient(rgba(255,255,255,.7), rgba(255,255,255,.7)), url('ball.jpg') ;
+    background-size: 80px;
+    background-position: right 0px bottom -16px;
+    background-repeat: repeat-y;
+    background-color: white;
+}
+
+.row {
+    background-color: green;
+    overflow: hidden;
+}
+
+.footer, .header {
+    font-size: 30px;
+    color: #0000FF;
+    background:#08f7db;
+    line-height: 50px;
+    min-height: 50px;
+    text-align: center;
+    clear: both;
+}
+
+
+
+.right img {
+   float: left;
+    margin: 7px;
+}
+
+
+@media screen and (max-width: 700px) {
+    .left {
+        float: none;
+        width: 100%;
+    }
+}

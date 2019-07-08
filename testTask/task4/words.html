@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body
+        {
+            max-width: 1000px;
+            margin:0 auto;
+            background-color: #009fda;
+            align-content: center;
+        }
+        :focus::-webkit-input-placeholder {color: transparent}
+        :focus::-moz-placeholder          {color: transparent}
+        :focus:-moz-placeholder           {color: transparent}
+        :focus:-ms-input-placeholder      {color: transparent}
+
+        ::-webkit-input-placeholder {color:#009fda;
+         font-size: large;
+         font-weight: bold; }
+        ::-moz-placeholder          {color:#009fda;
+            font-size: large;
+            font-weight: bold;}/* Firefox 19+ */
+        :-moz-placeholder           {color:#009fda;
+            font-size: large;
+            font-weight: bold;}/* Firefox 18- */
+        :-ms-input-placeholder      {color:#009fda;
+            font-size: large;
+            font-weight: bold;}
+    </style>
+</head>
+<body>
+<script>
+    "use strict"
+    function showTextBox() {
+        document.getElementById('content').style.display='block';
+        document.getElementById('inputText').style.display='none';
+    }
+
+    function showResult() {
+        var textAria =  document.getElementById('textVal');
+
+       // alert(textAria.value);
+        var textArr = unique(textAria.value.split(' '));
+        //console.log(textArr);
+        textArr = textArr.filter(function(el) { return el; });//remove '';
+        //console.log(textArr);
+        textArr.sort(function(a, b) {
+            return b.length - a.length;
+        });
+
+        var result = 'Три самых длинных слова: \n';
+
+        for (var i=0; i< textArr.length && i<3; i++) {
+
+            result+= (i==0) ? textArr[i] : ';' +textArr[i];
+        }
+
+        if (i<4) {
+            result += '\n' + 'в вашем тексте только';
+            switch (i) {
+                case 0:
+                    result = "Текст отсутствует!";
+                    break;
+                case 1:
+                    result += ' 1 слово ';
+                    break;
+                case 2:
+                case 3:
+                    result += ' ' + i + ' словa';
+                    break;
+            }
+        }
+
+        alert(result);
+
+        document.getElementById('content').style.display='none';
+        textAria.value = '';
+        document.getElementById('inputText').style.display='block';
+    }
+
+    function unique(arr) {
+        var obj = {};
+
+        for (var i = 0; i < arr.length; i++) {
+            var str = arr[i];
+            obj[str] = true; // запомнить строку в виде свойства объекта
+        }
+
+        return Object.keys(obj); // или собрать ключи перебором для IE8-
+    }
+</script>
+<h3><input type="button" id="inputText" value="ввести текст" onclick="showTextBox()"></h3>
+<div id="content" style="display: none">
+    <textarea id = 'textVal' rows="4" cols="50" placeholder="Введите текст произвольной длинны. По окончанию ввода нажмите 'обработать'."></textarea><br>
+    <input type="button" id="getResult" value="обработать" onclick="showResult()">
+</div>
+</body>
+</html>
