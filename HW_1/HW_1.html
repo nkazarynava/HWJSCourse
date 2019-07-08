@@ -28,7 +28,6 @@
 
     function isEmptyString (str) {
         var test = str.toString();
-        return (test.trim().length == 0) ? true : false;
         return (test.trim().length == 0 || test == 'null') ? true : false;
     }
 
