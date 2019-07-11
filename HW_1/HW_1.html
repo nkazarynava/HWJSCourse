@@ -14,14 +14,14 @@
 
     var sex = confirm("Нажмите ОК, если вы мужчина; Нажмите Cancel, если вы женщина.");
 
-    var pAge = sex  ? 70:65;
+    var pAge = sex  ? 65:60;
 
 
     var result = "ФИО: " + surName + " " + name + " " + sName + "\n" +
-            "возраст, лет: " + age + "\n" +
-            "через 5 лет вам будет: " + (age+=5) + "\n" +
-            "ваш пол: " + (sex ? "мужской" : "женский") + "\n" +
-            "вы на пенсии: " + (pAge <= age) ? 'да':'нет';
+    "возраст, лет: " + age + "\n" +
+    "через 5 лет вам будет: " + (age+5) + "\n" +
+    "ваш пол: " + (sex ? "мужской" : "женский") + "\n" +
+    "вы на пенсии: " + ((pAge <= age) ? 'да':'нет');
     alert(result);
 
 
@@ -40,7 +40,7 @@
     function askForAge(comments) {
         var test = parseInt(prompt(comments, ""));
         while ( isNaN(test) || test <=0 ) {
-            test = prompt( 'Ваш ввод некорректен. Повторите попытку! \n' + comments, "");
+            test = parseInt(prompt( 'Ваш ввод некорректен. Повторите попытку! \n' + comments, ""));
         }
         return test;
     }
