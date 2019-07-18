@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    "use strict"
+
+    var userString = prompt('Введите произвольную строку','');
+    var vowels = {'а':1,'е':1 ,'ё':1,'и':1, 'о':1, 'у':1, 'э':1, 'ю':1,'я':1, 'ы':1};
+    //forEach
+    function f1(str) {
+
+        var arr;
+        (arr = str.split('')).forEach(function(v,i,a){
+            a[i] = (vowels[v.toLowerCase()]) ? v:'';
+        });
+        return  arr.join('').length;
+    }
+    // filter
+    function f2 (str) {
+        var arr =str.split('');
+        arr = arr.filter(function(v,i,a) {
+            return (vowels[v.toLowerCase()]) ? true : false;
+        });
+        return  arr.length;
+    }
+
+    //reduce
+    function f3 (str) {
+        var arr =str.split('');
+        arr = arr.reduce(function(r,v,i,a) {
+            r+= (vowels[v.toLowerCase()]) ? 1:0;
+            return r;
+        }, 0);
+        return  arr;
+    }
+
+
+    console.log(f1(userString) + '-f1');
+    console.log(f2(userString) + '-f2');
+    console.log(f3(userString) + '-f3');
+</script>
+
+</body>
+</html>
