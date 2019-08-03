@@ -14,10 +14,12 @@
     function f1(str) {
 
         var arr;
+        var counter=0;
         (arr = str.split('')).forEach(function(v,i,a){
-            a[i] = (vowels[v.toLowerCase()]) ? v:'';
+            counter += (vowels[v.toLowerCase()]) ? 1:0;
+            //a[i] = (vowels[v.toLowerCase()]) ? v:'';
         });
-        return  arr.join('').length;
+        return  counter;
     }
     // filter
     function f2 (str) {
