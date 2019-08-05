@@ -65,7 +65,7 @@ var drinkStorage = (function () {
             if (typeof data === 'object') {
                 result += "drink name: <b>" + key+"</b></br>";
                 result += ((typeNames[data['type']]) ? typeNames[data['type']]  + " : <b> yes</b></br>":  typeNames[0]);
-                result += "receipe: </br><b>" + data['recipeStr']+"</h1>";
+                result += "receipe: </br><b>" + data['recipeStr']+"</b>";
             }
             return result;
         });
