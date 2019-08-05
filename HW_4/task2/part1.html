@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="JS/HashStorage.js"></script>
+</head>
+<body>
+<div id="msgBox"></div>
+<script>
+    "use strict"
+    //test functionality
+    drinkStorage.addValue('test1', {typessss:1, recipeStr:"kdfghskfhgkshgkfshgkh kshdhsgd fksgh"});
+    drinkStorage.addDrinkValue('test2', {typesddsd:1, recipeStr:"kdfghskfhgkshgk"});
+    drinkStorage.addDrinkValue('test3', {type:2, recipeStr:"kdfghskfhgkshgkfshgkhgksj"});
+    drinkStorage.addDrinkValue('test4', {type:1, recipeStr:"ksdhfg kshdhsgd fksgh"});
+    console.log(drinkStorage.getKeys());
+
+    var testValue = drinkStorage.getValue('test3');
+    console.log("name: test3, type:"+testValue.type + ", recipeStr:" + testValue.recipeStr );
+
+    testValue = drinkStorage.getValue('test1');
+    console.log("name: test1, type:"+testValue.type + ", recipeStr:" + testValue.recipeStr );
+
+    document.getElementById('msgBox').innerHTML = drinkStorage.getDrinkHtml('test3');
+
+</script>
+</body>
+</html>

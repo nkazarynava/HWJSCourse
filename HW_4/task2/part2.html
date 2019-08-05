@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script  src="JS/HashStorage.js" charset="UTF-8"></script>
+</head>
+<body>
+<div >
+    <input type="button" onclick="clearDivInfo(); addDrinkData();" name="inputInfo" value="ввод информации о напитке"/>
+    <br><br>
+    <input type="button" onclick="clearDivInfo(); showDrinkData();" name="searchInfo" value="получение информации о напитке"/>
+    <div id="msgBox"></div>
+    <br>
+    <input type="button" onclick="clearDivInfo(); deleteDrinkData();" name="deleteInfo" value="удаление информации о напитке"/>
+    <br><br>
+    <input type="button" onclick="clearDivInfo(); showDrinkNames();" name="showAllInfo" value="перечень всех напитков"/>
+</div>
+
+<script>
+
+function addDrinkData() {
+    var drinkName = askForNotEmptyStr("Введите название напитка:");
+    var drinkType = confirm("Нажмите ОК, если напиток алкогольный; Нажмите Cancel, если безалкогольный.");
+    drinkType++;
+    var drinkRecipe =  askForNotEmptyStr("Введите рецепт:");
+    var drink = {type: drinkType, recipeStr: drinkRecipe};
+    drinkStorage.addDrinkValue(drinkName, drink);
+}
+function isEmptyString (str) {
+    return (!str || str.trim().length == 0)
+}
+function askForNotEmptyStr(comments) {
+    var test = prompt(comments, "");
+    while (isEmptyString(test)) {
+        test = prompt( 'Ваш ввод некорректен. Повторите попытку! \n' + comments, "");
+    }
+    return test;
+}
+function showDrinkData() {
+    var drinkName = askForNotEmptyStr("Введите название напитка, который хотите найти:");
+    var data = drinkStorage.getDrinkHtml(drinkName);
+
+    if(isEmptyString(data)) {
+        alert("Напитка с именем: " + drinkName + " не найдено!");
+    } else {
+        document.getElementById('msgBox').innerHTML = data;
+    }
+}
+
+function clearDivInfo(){
+    document.getElementById('msgBox').innerHTML = '';
+}
+
+function deleteDrinkData() {
+    var drinkName = askForNotEmptyStr("Введите название напитка, который хотите найти:");
+    var result = drinkStorage.deleteValue(drinkName);
+    if(!result){
+        alert("Напитка с именем: " + drinkName + " не найдено!");
+
+    } else {
+        alert("Напитка с именем: " + drinkName + " удалён!");
+    }
+}
+function showDrinkNames() {
+    var data = drinkStorage.getKeys();
+    if(data.length) {
+        alert(data.join("\n"));
+    }
+    else {
+        alert('Хранилище напитков пустое!');
+    }
+
+}
+
+
+
+</script>
+
+</body>
+</html>
