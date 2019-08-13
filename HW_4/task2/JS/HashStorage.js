@@ -32,45 +32,6 @@ var drinkStorage = (function () {
 
     var drinkStorage = new HashStorage();
 
-    //additional functionality for drinks
-    drinkStorage.addDrinkValue = (function () {
-        var drinkKeys = {type: [0,1,2], recipeStr:''};
-        var validateFn = function (inputHash) {
-            if(! (typeof inputHash === 'object')) return false;
-            for (var k in drinkKeys) {
-                if ((k in inputHash)) {
-                    continue;
-                } else {
-                    return false;
-                }
-            }
-            return true;
-        };
-
-        return (function (key, inputHash) {
-            if (validateFn(inputHash)) {
-                this.addValue(key, inputHash);
-            } else {
-                console.log("Wrong drink data for name : " + key);
-            }
-        })
-    })().bind(drinkStorage);
-
-    drinkStorage.getDrinkHtml = (function() {
-        //var drinkInfo = {type: [1,2], recipeStr: ''};
-        var typeNames = ['unknown drink type','alcohol','alcohol free'];
-        return (function (key) {
-            var data = this.getValue(key);
-            var result = '';
-            if (typeof data === 'object') {
-                result += "drink name: <b>" + key+"</b></br>";
-                result += ((typeNames[data['type']]) ? typeNames[data['type']]  + " : <b> yes</b></br>":  typeNames[0]);
-                result += "receipe: </br><b>" + data['recipeStr']+"</b>";
-            }
-            return result;
-        });
-    })().bind(drinkStorage);
-
     return drinkStorage;
 })();
 

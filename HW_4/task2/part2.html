@@ -18,62 +18,99 @@
 </div>
 
 <script>
+    //additional functionality for drinks
 
-function addDrinkData() {
-    var drinkName = askForNotEmptyStr("Введите название напитка:");
-    var drinkType = confirm("Нажмите ОК, если напиток алкогольный; Нажмите Cancel, если безалкогольный.");
-    drinkType++;
-    var drinkRecipe =  askForNotEmptyStr("Введите рецепт:");
-    var drink = {type: drinkType, recipeStr: drinkRecipe};
-    drinkStorage.addDrinkValue(drinkName, drink);
-}
-function isEmptyString (str) {
-    return (!str || str.trim().length == 0)
-}
-function askForNotEmptyStr(comments) {
-    var test = prompt(comments, "");
-    while (isEmptyString(test)) {
-        test = prompt( 'Ваш ввод некорректен. Повторите попытку! \n' + comments, "");
+    drinkStorage.getDrinkHtml = (function() {
+        //var drinkInfo = {type: [1,2], recipeStr: ''};
+        var typeNames = ['unknown drink type','alcohol','alcohol free'];
+        return (function (key) {
+            var data = this.getValue(key);
+            var result = '';
+            if (typeof data === 'object') {
+                result += "drink name: <b>" + key+"</b></br>";
+                result += ((typeNames[data['type']]) ? typeNames[data['type']]  + " : <b> yes</b></br>":  typeNames[0]);
+                result += "receipe: </br><b>" + data['recipeStr']+"</b>";
+            }
+            return result;
+        });
+    })().bind(drinkStorage);
+
+    drinkStorage.addDrinkValue = (function () {
+        var drinkKeys = {type: [0,1,2], recipeStr:''};
+        var validateFn = function (inputHash) {
+            if(! (typeof inputHash === 'object')) return false;
+            for (var k in drinkKeys) {
+                if ((k in inputHash)) {
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        };
+
+        return (function (key, inputHash) {
+            if (validateFn(inputHash)) {
+                this.addValue(key, inputHash);
+            } else {
+                console.log("Wrong drink data for name : " + key);
+            }
+        })
+    })().bind(drinkStorage);
+
+    function addDrinkData() {
+        var drinkName = askForNotEmptyStr("Введите название напитка:");
+        var drinkType = confirm("Нажмите ОК, если напиток алкогольный; Нажмите Cancel, если безалкогольный.");
+        drinkType++;
+        var drinkRecipe =  askForNotEmptyStr("Введите рецепт:");
+        var drink = {type: drinkType, recipeStr: drinkRecipe};
+        drinkStorage.addDrinkValue(drinkName, drink);
     }
-    return test;
-}
-function showDrinkData() {
-    var drinkName = askForNotEmptyStr("Введите название напитка, который хотите найти:");
-    var data = drinkStorage.getDrinkHtml(drinkName);
-
-    if(isEmptyString(data)) {
-        alert("Напитка с именем: " + drinkName + " не найдено!");
-    } else {
-        document.getElementById('msgBox').innerHTML = data;
+    function isEmptyString (str) {
+        return (!str || str.trim().length == 0)
     }
-}
-
-function clearDivInfo(){
-    document.getElementById('msgBox').innerHTML = '';
-}
-
-function deleteDrinkData() {
-    var drinkName = askForNotEmptyStr("Введите название напитка, который хотите найти:");
-    var result = drinkStorage.deleteValue(drinkName);
-    if(!result){
-        alert("Напитка с именем: " + drinkName + " не найдено!");
-
-    } else {
-        alert("Напитка с именем: " + drinkName + " удалён!");
+    function askForNotEmptyStr(comments) {
+        var test = prompt(comments, "");
+        while (isEmptyString(test)) {
+            test = prompt( 'Ваш ввод некорректен. Повторите попытку! \n' + comments, "");
+        }
+        return test;
     }
-}
-function showDrinkNames() {
-    var data = drinkStorage.getKeys();
-    if(data.length) {
-        alert(data.join("\n"));
-    }
-    else {
-        alert('Хранилище напитков пустое!');
+    function showDrinkData() {
+        var drinkName = askForNotEmptyStr("Введите название напитка, который хотите найти:");
+        var data = drinkStorage.getDrinkHtml(drinkName);
+
+        if(isEmptyString(data)) {
+            alert("Напитка с именем: " + drinkName + " не найдено!");
+        } else {
+            document.getElementById('msgBox').innerHTML = data;
+        }
     }
 
-}
+    function clearDivInfo(){
+        document.getElementById('msgBox').innerHTML = '';
+    }
 
+    function deleteDrinkData() {
+        var drinkName = askForNotEmptyStr("Введите название напитка, который хотите найти:");
+        var result = drinkStorage.deleteValue(drinkName);
+        if(!result){
+            alert("Напитка с именем: " + drinkName + " не найдено!");
 
+        } else {
+            alert("Напитка с именем: " + drinkName + " удалён!");
+        }
+    }
+    function showDrinkNames() {
+        var data = drinkStorage.getKeys();
+        if(data.length) {
+            alert(data.join("\n"));
+        }
+        else {
+            alert('Хранилище напитков пустое!');
+        }
+
+    }
 
 </script>
 
